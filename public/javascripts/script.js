@@ -8,7 +8,7 @@ convertBtn.addEventListener('click', (event) => {
     event.preventDefault();
     let temp = inputEle.value;
     
-    if(!temp.match(/^[cf]\d+.?\d*$/g)){
+    if(!temp.match(/^[cfCF]\d+.?\d*$/g)){
         convertedEle.innerText = 'Invalid input. Valid example: c45, f50';
     } else {
         let isCToF = null;
@@ -29,7 +29,7 @@ convertBtn.addEventListener('click', (event) => {
             if (response.ok) { return response.json()}})
         .then(value => {
             const convertedTemp = value['temp'];
-            // console.log(co);
+            
             if(isCToF) {
                 // celsiusEle.value = celsiusTemp;
                 convertedEle.innerText = 'f' + convertedTemp;
@@ -42,12 +42,4 @@ convertBtn.addEventListener('click', (event) => {
     
 });
 
-downlowdBtn.addEventListener('click', event => {
-    event.preventDefault();
-    fetch('/download')
-    .then(response =>{
-        //TO DO
-    })
-
-});
     
