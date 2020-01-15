@@ -1,6 +1,5 @@
 
 const convertBtn = document.querySelector('#convert');
-const downlowdBtn = document.querySelector('#download');
 const inputEle = document.querySelector('#input_temp');
 const convertedEle = document.querySelector('#converted');
 
@@ -8,16 +7,16 @@ convertBtn.addEventListener('click', (event) => {
     event.preventDefault();
     let temp = inputEle.value;
     
-    if(!temp.match(/^[cfCF]\d+.?\d*$/g)){
-        convertedEle.innerText = 'Invalid input. Valid example: c45, f50';
+    if(!temp.match(/\d+.?\d*[cfCF]$/g)){
+        convertedEle.innerText = 'Invalid input. Valid example: 45c, 50f';
     } else {
         let isCToF = null;
-        if(temp.charAt(0).toLowerCase() === 'c') {
+        if(temp.charAt(temp.length-1).toLowerCase() === 'c') {
             isCToF = true;    
         } else {
             isCToF = false;
         }
-        temp = parseFloat(temp.substring(1));
+        temp = parseFloat(temp.slice(0,-1));
         console.log(temp);
 
         fetch('/', {
@@ -31,11 +30,9 @@ convertBtn.addEventListener('click', (event) => {
             const convertedTemp = value['temp'];
             
             if(isCToF) {
-                // celsiusEle.value = celsiusTemp;
-                convertedEle.innerText = 'f' + convertedTemp;
+                convertedEle.innerText = convertedTemp +'f';
             } else {
-                convertedEle.innerText = 'c' + convertedTemp;
-                // fahrenheitEle.value = fahrenheitTemp;
+                convertedEle.innerText = convertedTemp +'c';
             }
         });
     }

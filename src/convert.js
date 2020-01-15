@@ -19,3 +19,5 @@ const degree_convertion = str => {
     : (d = f_to_c(str.slice(0, -1)));
   return Math.round(d);
 };
+
+module.exports = degree_convertion;
